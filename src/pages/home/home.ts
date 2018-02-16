@@ -1,15 +1,26 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
+import { MenuController } from 'ionic-angular/components/app/menu-controller';
 
-@IonicPage() // Permite referenciar a classe por meio de String, Exemplo: 'HomePage'
+@IonicPage()
 @Component({
 	selector: 'page-home',
 	templateUrl: 'home.html'
 })
 export class HomePage {
 
-	constructor(public navCtrl: NavController) {
+	constructor(public navCtrl: NavController, public menu: MenuController) {
 
+	}
+
+	// Desabilita o menu quando entra na página. Não deve ter menu na view de login.
+	ionViewWillEnter() {
+		this.menu.swipeEnable(false);
+	}
+
+	// Habilita o menu quando sai da página. Não deve ter menu na view de login.
+	ionViewDidLeave() {
+		this.menu.swipeEnable(true);
 	}
 
 	login() {
